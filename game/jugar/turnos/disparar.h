@@ -1,4 +1,5 @@
 int tocarBarco(int posX, int posY, int x, int y, int jugador, int b1_barco1_2C[x][y], int b1_barco2_3C[x][y], int b1_barco3_3C[x][y], int b1_barco4_4C[x][y], int b1_barco5_5C[x][y], int b2_barco1_2C[x][y], int b2_barco2_3C[x][y], int b2_barco3_3C[x][y], int b2_barco4_4C[x][y], int b2_barco5_5C[x][y]);
+int checkContinue(int jugador, int x, int y, int tablero1[x][y], int tablero2[x][y]);
 
 //comprobarHundido: Si es hundido return 1 || Si no, return 0
 int comprobarHundido(int barco, int x, int y, int jugador, int b1_barco1_2C[x][y], int b1_barco2_3C[x][y], int b1_barco3_3C[x][y], int b1_barco4_4C[x][y], int b1_barco5_5C[x][y], int b2_barco1_2C[x][y], int b2_barco2_3C[x][y], int b2_barco3_3C[x][y], int b2_barco4_4C[x][y], int b2_barco5_5C[x][y]);
@@ -21,13 +22,17 @@ extern int realizarDisparo(int y, int x,
 	
 	
 	char letra='\0';
-    int posY=0, posX=0, comprobar=0, barco=0, ocupado=0, hundido=0;
+    int posY=0, posX=0, comprobar=0, barco=0, ocupado=0, hundido=0, ganador=0;
 	
 	do{
-		limpiarPantalla();
-		printf("\n\n\n\n\t\tTurno del jugador %d\n\t\t", jugador);
-		printf("\n\t\t");
-		system("pause");
+		if(ocupado==0){
+			limpiarPantalla();
+			printf("\n\n\n\n\t\tTurno del jugador %d\n\t\t", jugador);
+			printf("\n\t\t");
+			pause();
+		}
+		ocupado=0;
+		
 		limpiarPantalla();
 		imprimirMatrizEnTabla2PlayersInGame(y, x, tablero1, tablero2);
 		
@@ -43,7 +48,7 @@ extern int realizarDisparo(int y, int x,
 		    if((posX>x && posY>y) && (posX<0 && posY<0)){
 		    	printf("\n\t\t El disparo debe de ser dentro del tablero \n\t\t Int%cntelo otra vez:", 130);
 			}
-	    }while((posX>x && posY>y) && (posX<0 && posY<0));
+	    }while((posX>x || posY>y) || (posX<0 || posY<0));
 		
 		//Comprobar Disparo
 		comprobar=tablero2[posY][posX];
@@ -73,7 +78,7 @@ extern int realizarDisparo(int y, int x,
 					barco=tocarBarco(posX, posY, x, y, jugador, b1_barco1_2C, b1_barco2_3C, b1_barco3_3C, b1_barco4_4C, b1_barco5_5C, b2_barco1_2C, b2_barco2_3C, b2_barco3_3C, b2_barco4_4C, b2_barco5_5C);
 				}while(barco==0);
 				
-				ocupado=0;
+				ocupado=1;
 				
 				limpiarPantalla();
 				imprimirMatrizEnTabla2PlayersInGame(y, x, tablero1, tablero2);
@@ -84,7 +89,11 @@ extern int realizarDisparo(int y, int x,
 					if(hundido==1){
 						printf("\n\t\t y adem%cs lo has HUNDIDO\n",160);
 					}
-				break;
+					ganador=checkContinue(jugador, x, y, tablero1, tablero2);
+					if(ganador==0){
+						printf("\n\n\t\t Vuelves a disparar hasta que falles!\n");
+					}
+				break;	
 			
 			case 126:
 			case 111:
@@ -101,8 +110,8 @@ extern int realizarDisparo(int y, int x,
 				break;
 		}
 		printf("\n\n\t\t");
-		system("pause");
-	}while(ocupado==1);	
+		pause();	
+	}while(ocupado==1 && ganador==0);
 
 	if(jugador==1){
 		return 2;
@@ -270,4 +279,21 @@ int comprobarHundido(	int barco,			//Si es hundido return 1 || Si no, return 0
 	}
 	
 	return 1; //No ha encontrado parte del barco intacta, devuelve 1
+}
+
+int checkContinue(int jugador, int x, int y, int tablero1[x][y], int tablero2[x][y]){//Si hay ganador return 1, sino return 0
+	int i=0, j=0;
+	
+		for(i=0;i<x;i++){
+			for(j=0;j<y;j++){
+				if(tablero1[i][j]==120){//Si encuentra parte de un barco enemigo intacta, return 0
+					return 0;
+				}
+				else if(tablero2[i][j]==120){//Si encuentra parte de un barco enemigo intacta, return 0
+					return 0;
+				}
+			}
+			
+		}
+	return 1; //No se ha encontrado un barco intacto en el tablero enemigo, el jugador actual ha ganado.
 }

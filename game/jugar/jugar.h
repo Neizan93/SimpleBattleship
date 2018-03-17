@@ -41,12 +41,12 @@ extern void playMenu(int x, int y, int tablero1[x][y], int tablero2[x][y]){
 	
 	limpiarPantalla();
     printf("\n\n\n\n\t\tTurno del jugador 1\n\t\t");
-    system("pause");
+    pause();
     colocarBarcos(x, y, tablero1, tablero2, b1_barco1_2C, b1_barco2_3C, b1_barco3_3C, b1_barco4_4C, b1_barco5_5C);
 
     limpiarPantalla();
     printf("\n\n\n\n\t\tTurno del jugador 2\n\t\t");
-    system("pause");
+    pause();
     colocarBarcos(x, y, tablero2, tablero1, b2_barco1_2C, b2_barco2_3C, b2_barco3_3C, b2_barco4_4C, b2_barco5_5C);
 	
 	gestionarTurnos(x,y,

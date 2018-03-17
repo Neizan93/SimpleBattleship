@@ -23,7 +23,7 @@ int main(){
 	system("COLOR 1A");
 	
 	printf("\n\n\n                                        # #  ( )\n                                  ___#_#___|__\n                                 _  |____________|  _\n                          _=====| | |            | | |==== _\n                    =====| |.---------------------------. | |====\n      <--------------------'   .  .  .  .  .  .  .  .   '--------------/\n        \\                                                             /\n         \\___________________________________________________________/\n     wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww\n    wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww\n      wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww \n\n\t\t");
-	system("pause");
+	pause();
 	limpiarPantalla();
 	
 	while(opcion!=3){

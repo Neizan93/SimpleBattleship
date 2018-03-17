@@ -102,12 +102,12 @@ void colocarUnBarco(int tamanyo, char nombreBarco[], int x, int y, int barco[x][
 				posY=posY-1;
 				
 				check=0;
-				do{
-					pos=obtenerPosicionBarco(posX, posY, posXant, posYant);//pos=1 vertical | pos=2 horizontal | pos=0 error
-				}while(pos==0);
+				
+				pos=obtenerPosicionBarco(posX, posY, posXant, posYant);//pos=1 vertical | pos=2 horizontal | pos=0 error
+				
 				check=preVerificarBarco(pos, tamanyo, posX, posY, posXant, posYant, posXorigen, posYorigen, x, y, tablero1, i);//pos=1 vertical | pos=2 horizontal
 				
-			}while(check==1);
+			}while(check==1 || posX==100 || pos==0);
 		}
 		else if(i!=0 && i!=1){
 			do{
@@ -121,10 +121,10 @@ void colocarUnBarco(int tamanyo, char nombreBarco[], int x, int y, int barco[x][
 				
 				check=0;
 				check=preVerificarBarco(pos, tamanyo, posX, posY, posXant, posYant, posXorigen, posYorigen, x, y, tablero1, i);
-				if(check==0){
-					check=verificarPosicionBarco(pos, posX, posY, posXant, posYant);
-				}					
-			}while(check==1);
+					if(check==0){
+						check=verificarPosicionBarco(pos, posX, posY, posXant, posYant);
+					}				
+			}while(check==1 || posX==100);
 			
 		}
 		barco[posY][posX]=120;

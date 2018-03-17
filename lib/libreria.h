@@ -332,9 +332,10 @@ extern void limpiarPantalla(){
 	system("cls");
 }
 
-extern void pausePulsaTecla(){
-	system("pause");
-	//getch();
+extern void pause(){
+	//system("pause");
+	printf("Presione una tecla para continuar . . .");
+	getch();
 }
 
 extern int contarDigitos(int n){
@@ -694,6 +695,8 @@ int letraANumero(char letra) {
 		case 'J':
 		case 'j':
 			return 9;
+		default:
+			return 100;
 	}
 	return 100;
 }
