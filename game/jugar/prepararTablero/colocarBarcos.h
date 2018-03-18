@@ -1,37 +1,68 @@
 #include "verificarBarcos.h"
 
-void colocarUnBarco(int tamanyo, char nombreBarco[], int x, int y, int barco[x][y], int tablero1[x][y], int tablero2[x][y]);
+void colocarUnBarco(int lang, int tamanyo, char nombreBarco[], int x, int y, int barco[x][y], int tablero1[x][y], int tablero2[x][y]);
 void imprimirMatrizEnTabla2PlayersContinuacion(int y, int x, int matriz1[x][y], int matriz2[x][y], int posXant, int posYant, int posXorigen, int posYorigen, int pos, int parte);
 
-extern void colocarBarcos(int x,int y,int tablero1[x][y], int tablero2[x][y], int barco1_2C[x][y], int barco2_3C[x][y],int barco3_3C[x][y],int barco4_4C[x][y],int barco5_5C[x][y]) {
+extern void colocarBarcos(int lang, int x,int y,int tablero1[x][y], int tablero2[x][y], int barco1_2C[x][y], int barco2_3C[x][y],int barco3_3C[x][y],int barco4_4C[x][y],int barco5_5C[x][y]) {
 	int tamanyoBarco=0;
 	int flag=0;
-	char lancha[]={"Lancha"};
-	char bote[]={"Bote"};
-	char sub[]={"Submarino"};
-	char tran[]={"Transanlantico"};
-	char guerr[]={"Barco de guerra"};
+		
+		char lanchaEn[]={"Destroyer"};
+		char boteEn[]={"Cruiser"};
+		char subEn[]={"Submarine"};
+		char tranEn[]={"Battleship"};
+		char guerrEn[]={"Carrier"};
+		
+		char lanchaEs[]={"Lancha"};
+		char boteEs[]={"Bote"};
+		char subEs[]={"Submarino"};
+		char tranEs[]={"Transanlantico"};
+		char guerrEs[]={"Barco de guerra"};
 	
 	int tableroVacio[x][y];
 	inicializarMatrizAValor(x, y, tableroVacio, 254);
-		
+	
 	limpiarPantalla();
 	imprimirMatrizEnTabla2Players(y, x, tablero1, tableroVacio);
 	
-	printf("\n\t\t == ES EL MOMENTO DE COLOCAR TUS BARCOS == \n");
-	printf("\n\t\t ======= INTRODUCE LAS COORDENADAS ======= \n");
+	if(lang==1){
+		printf("\n\t\t ==== IT'S TIME TO PUT YOUR BOATS ==== \n");
+		printf("\n\t\t ======= ENTER THE COORDINATES ======= \n");
+	}
+	else if(lang==2){
+		printf("\n\t\t == ES EL MOMENTO DE COLOCAR TUS BARCOS == \n");
+		printf("\n\t\t ======= INTRODUCE LAS COORDENADAS ======= \n");
+	}
 	
 	do{
 		tamanyoBarco=2;
-		colocarUnBarco(tamanyoBarco, lancha, x, y, barco1_2C, tablero1, tableroVacio);
-		
+			switch(lang){
+				case 1 :
+				default:
+					colocarUnBarco(lang, tamanyoBarco, lanchaEn, x, y, barco1_2C, tablero1, tableroVacio);
+					break;
+				
+				case 2 :
+					colocarUnBarco(lang, tamanyoBarco, lanchaEs, x, y, barco1_2C, tablero1, tableroVacio);
+					break;
+			}
+			
 		flag=postVerificarBarco(tamanyoBarco, x, y, barco1_2C, tablero1);
 		//printError(flag);
 	}while(flag==1);
 		
 	do{
 		tamanyoBarco=3;
-		colocarUnBarco(tamanyoBarco, bote, x, y, barco2_3C, tablero1, tableroVacio);
+		switch(lang){
+			case 1 :
+			default:
+				colocarUnBarco(lang, tamanyoBarco, boteEn, x, y, barco2_3C, tablero1, tableroVacio);
+				break;
+			
+			case 2 :
+				colocarUnBarco(lang, tamanyoBarco, boteEs, x, y, barco2_3C, tablero1, tableroVacio);
+				break;
+		}
 		
 		flag=postVerificarBarco(tamanyoBarco, x, y, barco2_3C, tablero1);
 		//printError(flag);
@@ -39,7 +70,16 @@ extern void colocarBarcos(int x,int y,int tablero1[x][y], int tablero2[x][y], in
 		
 	do{
 		tamanyoBarco=3;
-		colocarUnBarco(tamanyoBarco, sub, x, y, barco3_3C, tablero1, tableroVacio);
+		switch(lang){
+			case 1 :
+			default:
+				colocarUnBarco(lang, tamanyoBarco, subEn, x, y, barco3_3C, tablero1, tableroVacio);
+				break;
+			
+			case 2 :
+				colocarUnBarco(lang, tamanyoBarco, subEs, x, y, barco3_3C, tablero1, tableroVacio);
+				break;
+		}
 		
 		flag=postVerificarBarco(tamanyoBarco, x, y, barco3_3C, tablero1);
 		//printError(flag);
@@ -47,7 +87,16 @@ extern void colocarBarcos(int x,int y,int tablero1[x][y], int tablero2[x][y], in
 		
 	do{
 		tamanyoBarco=4;
-		colocarUnBarco(tamanyoBarco, tran, x, y, barco4_4C, tablero1, tableroVacio);
+		switch(lang){
+			case 1 :
+			default:
+				colocarUnBarco(lang, tamanyoBarco, tranEn, x, y, barco4_4C, tablero1, tableroVacio);
+				break;
+			
+			case 2 :
+				colocarUnBarco(lang, tamanyoBarco, tranEs, x, y, barco4_4C, tablero1, tableroVacio);
+				break;
+		}
 		
 		flag=postVerificarBarco(tamanyoBarco, x, y, barco4_4C, tablero1);
 		//printError(flag);
@@ -55,7 +104,16 @@ extern void colocarBarcos(int x,int y,int tablero1[x][y], int tablero2[x][y], in
 	
 	do{
 		tamanyoBarco=5;
-		colocarUnBarco(tamanyoBarco, guerr, x, y, barco5_5C, tablero1, tableroVacio);
+		switch(lang){
+			case 1 :
+			default:
+				colocarUnBarco(lang, tamanyoBarco, guerrEn, x, y, barco5_5C, tablero1, tableroVacio);
+				break;
+			
+			case 2 :
+				colocarUnBarco(lang, tamanyoBarco, guerrEs, x, y, barco5_5C, tablero1, tableroVacio);
+				break;
+		}
 		
 		flag=postVerificarBarco(tamanyoBarco, x, y, barco5_5C, tablero1);
 		//printError(flag);
@@ -63,7 +121,7 @@ extern void colocarBarcos(int x,int y,int tablero1[x][y], int tablero2[x][y], in
 	
 }
 
-void colocarUnBarco(int tamanyo, char nombreBarco[], int x, int y, int barco[x][y], int tablero1[x][y], int tablero2[x][y]){
+void colocarUnBarco(int lang, int tamanyo, char nombreBarco[], int x, int y, int barco[x][y], int tablero1[x][y], int tablero2[x][y]){
 /*	Un barco debe ocupar tantas casillas como este mide
 	las casillas deben ser consecutivas, vertical o horizontalmente
 	además debe verificarse que la posición del barco se encuentra dentro del rango del tablero.
@@ -74,12 +132,22 @@ void colocarUnBarco(int tamanyo, char nombreBarco[], int x, int y, int barco[x][
 	int posX=0,posY=0,i=0,posXant=0,posYant=0, posXorigen=0, posYorigen=0;
 	int check=0;
 	
-	printf("\n\t\t\t %s (%d casillas):\n",nombreBarco, tamanyo);
+	if(lang==1){
+		printf("\n\t\t\t %s (%d squares):\n",nombreBarco, tamanyo);
+	}
+	else if(lang==2){
+		printf("\n\t\t\t %s (%d casillas):\n",nombreBarco, tamanyo);
+	}
 	
 	for (i=0;i<tamanyo;i++){
 		if(i==0){
 			do{
-				printf("\n \t\t\t  Casilla %d/%d: ", i+1,tamanyo);
+				if(lang==1){
+					printf("\n \t\t\t  Square %d/%d: ", i+1,tamanyo);
+				}
+				else if(lang==2){
+					printf("\n \t\t\t  Casilla %d/%d: ", i+1,tamanyo);
+				}			
 				scanf(" %c%i",&letra,&posY);
 				
 				posX=letraANumero(letra);
@@ -95,7 +163,12 @@ void colocarUnBarco(int tamanyo, char nombreBarco[], int x, int y, int barco[x][
 			do{
 				limpiarPantalla();
 				imprimirMatrizEnTabla2PlayersContinuacion(y, x, tablero1, tablero2, posXant, posYant, posXorigen, posYorigen, pos, i);
-				printf("\n \t\t\t  Casilla %d/%d: ", i+1,tamanyo);
+				if(lang==1){
+					printf("\n \t\t\t  Square %d/%d: ", i+1,tamanyo);
+				}
+				else if(lang==2){
+					printf("\n \t\t\t  Casilla %d/%d: ", i+1,tamanyo);
+				}
 				scanf(" %c%i",&letra,&posY);
 			
 				posX=letraANumero(letra);
@@ -113,7 +186,12 @@ void colocarUnBarco(int tamanyo, char nombreBarco[], int x, int y, int barco[x][
 			do{
 				limpiarPantalla();
 				imprimirMatrizEnTabla2PlayersContinuacion(y, x, tablero1, tablero2, posXant, posYant, posXorigen, posYorigen, pos, i);
-				printf("\n \t\t\t  Casilla %d/%d: ", i+1,tamanyo);
+				if(lang==1){
+					printf("\n \t\t\t  Square %d/%d: ", i+1,tamanyo);
+				}
+				else if(lang==2){
+					printf("\n \t\t\t  Casilla %d/%d: ", i+1,tamanyo);
+				}
 				scanf(" %c%i",&letra,&posY);
 			
 				posX=letraANumero(letra);

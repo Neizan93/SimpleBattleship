@@ -10,8 +10,7 @@ extern int comprobarGanador(int jugador, int x, int y, int tablero1[x][y], int t
 			}
 		}
 	}
-	
-	if(jugador==2){
+	else if(jugador==2){
 		for(i=0;i<x;i++){
 			for(j=0;j<y;j++){
 				if(tablero2[i][j]==120){//Si encuentra parte de un barco enemigo intacta, return 0
@@ -24,7 +23,12 @@ extern int comprobarGanador(int jugador, int x, int y, int tablero1[x][y], int t
 	return 1; //No se ha encontrado un barco intacto en el tablero enemigo, el jugador actual ha ganado.
 }
 
-extern void anunciarGanador(int jugador){
+extern void anunciarGanador(int lang, int jugador){
 	printf("\n\n\t\t");
-	printf("Ha ganado el jugador %d\n", jugador);
-} 
+	if(lang==1){
+		printf("Player %d has won\n", jugador);
+	}
+	else if(lang==2){
+		printf("Ha ganado el jugador %d\n", jugador);
+	}
+}

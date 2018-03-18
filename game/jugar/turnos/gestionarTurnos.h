@@ -2,6 +2,7 @@
 #include "ganador.h"
 
 extern void gestionarTurnos(
+	int lang,
 	int y, int x,
 	int tablero1[x][y],
 	int tablero2[x][y],
@@ -26,7 +27,8 @@ extern void gestionarTurnos(
 	do{
 		switch(turno){
 			case 1 :
-				turno=realizarDisparo(x,y,
+				turno=realizarDisparo(lang,
+						x,y,
 						turno,
 				
 						tablero1,
@@ -46,7 +48,8 @@ extern void gestionarTurnos(
 						);
 				break;
 			case 2 : 
-				turno=realizarDisparo(x,y,
+				turno=realizarDisparo(lang,
+						x,y,
 						turno,
 	
 						tablero2,
@@ -74,7 +77,16 @@ extern void gestionarTurnos(
 		if(ganador==1){
 			limpiarPantalla();
 			imprimirMatrizEnTabla2Players(x, y, tablero1, tablero2);
-			anunciarGanador(turno);
+			switch(turno){
+				case 1:
+					turno=2;
+					break;
+				case 2:
+					turno=1;
+					break;
+			}
+			anunciarGanador(lang, turno);
+			
 			printf("\n\t\t");
 			getch();
 			turno=3;

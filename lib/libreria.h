@@ -338,6 +338,18 @@ extern void pause(){
 	getch();
 }
 
+extern void pauseLang(int lang){//1- Ingles, 2-Español
+	//system("pause");
+	if(lang==1){
+		printf("Press a key to continue . . .");
+	}
+	else if(lang==2){
+		printf("Presione una tecla para continuar . . .");	
+	}
+	getch();
+}
+
+
 extern int contarDigitos(int n){
 	int digitos=1;
 	while(n/10>0){
@@ -387,6 +399,58 @@ extern int scanMenuDynamicSize(char *printMenu[]){
 		}
 		fflush(stdin);
 		printf("\n\t\t\t Escoge una opci%cn: ",162);
+		scanf("%i",&o);
+		/*if(o<1 || o>numElementos){
+			printf("\nNo has introducido una opcion correcta, intentalo otra vez\n");
+		}*/
+	}while(o<1 || o>=numElementos);
+	return o;
+	
+	/*EJEMPLO:
+	
+#include "libreria.h"
+
+int main(){
+	int optMenu=0;
+	char *textoMenu[]={
+		"Opcion1- Esta es una opcion",
+		"Opcion2- Esta es otra opcion mas",
+		"Opcion3- probando...",
+		"Opcion4 - text",
+		"Opcion5- testing 5555",
+		NULL
+	};
+		
+	optMenu=scanMenuUsingPointers(textoMenu);
+	
+	printf("La opcion marcada es %i",optMenu);
+	
+	return 0;
+}
+
+*/
+	
+}
+
+extern int scanMenuDynamicSizeLang(int lang, char *printMenu[]){
+	int o=0, i=0, numElementos=0;
+	
+	while(printMenu[numElementos++]!=NULL){};
+	numElementos--; //Usar si hay título en el char *printMenu
+	numElementos--; //Usar si hay pie de menu en el char *printMenu
+	
+		//system("cls");	//comentar si hay algo encima que no debe ser limpiado
+		for(i=0;i<=numElementos;i++){
+			printf("%s\n",printMenu[i]);
+		}
+	do{
+		fflush(stdin);
+		if(lang==1){
+			printf("\n\t\t\t Choose an option: ");
+		}
+		else if(lang==2){
+			printf("\n\t\t\t Escoge una opci%cn: ",162);
+		}
 		scanf("%i",&o);
 		/*if(o<1 || o>numElementos){
 			printf("\nNo has introducido una opcion correcta, intentalo otra vez\n");
